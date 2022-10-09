@@ -31,9 +31,16 @@ force :: Float -> Float -> Float -> Float
 force m1 m2 d = (g * m1 * m2) / (d ^ 2)
     where g = 6.67 * (10 ^ (-11))
 
+-- List Comprehensions
 
--- pythagTriples :: Int -> [[Int]]
--- pythagTriples n = [ [xyz] | x <- [1..n], y <- [1..n], z <- [1..n], (x ^ 2) + (y ^ 2) == z ^ 2]
+-- 1. Using a list comprehension, calculate the numbers between 1 and 30 which are divisible by 3 (mod:: Int -> Int -> Int)
+divby3 = [x | x <- [1..30], x `mod` 3 == 0]
+
+-- 2. Using a list comprehension, write a function which calculates the first n triangle numbers
+triangles :: Int -> [Int]
+triangles n = [ y | x <- [0..n], y <- [(x * (x + 1)) `div` 2]]
+
+-- 3. Prime numbers using trial division
 
 primes :: Int -> [Int]
 primes n = [ x | x <- [1..n], isPrime x]
@@ -41,7 +48,22 @@ primes n = [ x | x <- [1..n], isPrime x]
         divisors x = [ y | y <- [2..(x-1)], x `mod` y == 0]
         isPrime x = length (divisors x) == 0
 
+
+-- 4. Using a list comprehension, write a function which flattens a nested list
+flatten :: [[a]] -> [a]
+flatten xs = [ y | x <- xs, y <- x ]
+
+
+-- Lecture Examples
+
+-- pythagTriples :: Int -> [[Int]]
+pythagTriples n = [ [x,y,z] | x <- [1..n], y <- [1..n], z <- [1..n], (x ^ 2) + (y ^ 2) == z ^ 2]
+
+
+
 main = do
+
+    -- Functions
 
     -- 1
     print("max2 5 10")
@@ -59,5 +81,25 @@ main = do
     print("g g1 g2 18")
     print(g g1 g2 18)
 
-    -- -- pythag
-    -- pythagTriples 20
+    -- Lists
+
+    --1
+    print("divisible by 3")
+    print(divby3)
+
+    -- 2
+    print("triangles")
+    print(triangles 5)
+
+    -- 3
+    print("prime numbers")
+    print(primes 50)
+
+    -- 4
+    print("flatten")
+    print(flatten [[1,2,3],[4,5,6]])
+
+
+    --Extra example
+    print("pythagorean triple")
+    print(pythagTriples 20)
