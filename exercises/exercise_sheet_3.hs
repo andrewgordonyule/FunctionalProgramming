@@ -1,6 +1,7 @@
 -- Exercise Sheet 3
 
 -- Recursion
+
 -- 1. Write a function which returns True if the given list contains elements in ascending order
 isAscending :: [Int] -> Bool
 isAscending [] = True
@@ -24,7 +25,25 @@ dropOdds = dropOdds' True
         dropOdds' True (x : xs) = x : (dropOdds' False xs) 
         dropOdds' False (_ : xs) = (dropOdds' True xs) -- ignores 1st element
 
+
+-- 4. Write a function which returns a list with the given element inserted at every other position
+myIntersperse :: [a] -> a -> [a]
+myIntersperse [] _ = []
+myIntersperse [x] y = [x, y]
+myIntersperse (x : y : xs) z = x : z : myIntersperse (y:xs) z 
+
+
+-- Higher Order Functions
+
+-- 1. Write a function which applies the given function to each element of a list
+myMap :: (a -> b) -> [a] -> [b]
+myMap _ [] = []
+myMap f1 (x:xs) = f1 x : myMap f1 xs
+
+f1 x = x*2
+
 main = do
+    -- Recursion
     -- 1
     print "isAscending"
     print(isAscending[1,2,3])
@@ -37,3 +56,12 @@ main = do
     -- 3
     print "dropOdds"
     print(dropOdds [1,2,3,4,5,6,7,8,9])
+
+    -- 4
+    print "myIntersperse"
+    print(myIntersperse [1,2,3] 10)
+
+    -- Higher Order Functions
+    -- 1
+    print "myMap"
+    print(myMap f1 [1,2,3])
