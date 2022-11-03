@@ -1,6 +1,7 @@
 -- Exercise Sheet 2
 
 import Data.Char
+import Data.Foldable
 
 -- Booleans, Comparisons, Tuples and More Lists
 
@@ -42,6 +43,19 @@ f2 x =
         then "Kenobi"
     else "Wars"
 
+-- 8. Write a function mapPair2 :: ((a, b) -> (c, d)) -> (a, b) -> (c, d)
+mapPair2 :: ((a, b) -> (c, d)) -> (a, b) -> (c, d)
+mapPair2 f3 (a,b) = f3 (a,b)
+
+f3 (a,b) = (a+1, b+1)
+
+-- 9. Write a function  f :: (a, b) -> (a -> c) -> (b -> d) -> ((c, d) -> e) -> e
+f :: (a, b) -> (a -> c) -> (b -> d) -> ((c, d) -> e) -> e
+f (a,b) func1 func2 func3 = func3 (func1 (a), func2 (b))
+
+func1 x = x+1
+func2 x = x+1
+func3 (x,y) = x*y
 
 -- IO
 
@@ -52,6 +66,13 @@ echoCaps = do
     myText <- getLine
     putStrLn [ toUpper x | x <- myText]
 
+-- 2. Write a function echoFile :: FilePath -> IO () which prints out a file to the console, line-by-line
+
+echoFile :: FilePath -> IO ()
+echoFile path = do
+    str <- readFile path
+    let strLines = lines str
+    forM_ strLines (putStrLn)
 
 main = do
 
@@ -85,7 +106,17 @@ main = do
     print("mapPair")
     print(mapPair f1 f2 ("Hello", "There"))
 
+    print("mapPair2")
+    print(mapPair2 f3 (1,2))
+
+    print("f")
+    print(f (2,2) func1 func2 func3)
+
     -- IO
 
     print("echoCaps")
     echoCaps
+
+    print("echoFile")
+    echoFile "C:/Users/andre/Desktop/hello.txt"
+
