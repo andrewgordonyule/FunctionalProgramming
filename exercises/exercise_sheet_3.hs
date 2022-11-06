@@ -1,3 +1,4 @@
+import GHC.CmmToAsm.AArch64.Instr (x0)
 -- Exercise Sheet 3
 
 -- Recursion
@@ -32,6 +33,17 @@ myIntersperse [] _ = []
 myIntersperse [x] y = [x, y]
 myIntersperse (x : y : xs) z = x : z : myIntersperse (y:xs) z 
 
+-- 5. Write a function which reverses the given list using recursion
+myReverseRec :: [a] -> [a]
+myReverseRec [] = []
+myReverseRec [x] = [x]
+myReverseRec (x:xs) = myReverseRec xs ++ [x]
+
+-- 6. Write a function which reverses the given list using fold
+myReverseFold :: [a] -> [a]
+myReverseFold [] = []
+-- 
+
 
 -- Higher Order Functions
 
@@ -60,6 +72,10 @@ main = do
     -- 4
     print "myIntersperse"
     print(myIntersperse [1,2,3] 10)
+
+    -- 5
+    print "myReverseRec"
+    print (myReverseRec[1,2,3,4])
 
     -- Higher Order Functions
     -- 1
