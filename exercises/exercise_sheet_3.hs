@@ -54,6 +54,46 @@ myMap f1 (x:xs) = f1 x : myMap f1 xs
 
 f1 x = x*2
 
+
+-- Algebraic Datatypes
+
+-- 1. Suppose we have the following data type:
+
+data ArithExpr = 
+    Add ArithExpr ArithExpr
+    | Sub ArithExpr ArithExpr
+    | Mul ArithExpr ArithExpr
+    | Div ArithExpr ArithExpr
+    | Value Int
+
+-- a) Write the function evalExpr :: ArithExpr -> Int which evaluates an expression
+evalExpr :: ArithExpr -> Int
+evalExpr (Add val1 val2) = v1 + v2
+    where
+        v1 = evalExpr val1
+        v2 = evalExpr val2
+evalExpr (Mul val1 val2) = 
+    let v1 = evalExpr val1 in
+    let v2 = evalExpr val2 in
+    v1 * v2
+evalExpr (Sub val1 val2) = v1 - v2
+    where
+        v1 = evalExpr val1
+        v2 = evalExpr val2
+evalExpr (Div val1 val2) = div v1 v2
+    where
+        v1 = evalExpr val1
+        v2 = evalExpr val2
+evalExpr (Value val1) = val1
+
+-- b) Write a function showExpr :: ArithExpr -> String which prints an expression as a string 
+-- e.g. showExpr Add (Mul (Value 2) (Value 4)) (Value 5) = "(2 * 4) + 5"
+-- showExpr :: ArithExpr -> String
+ 
+
+
+-- Further Exercises
+
 main = do
     -- Recursion
     -- 1
@@ -81,3 +121,11 @@ main = do
     -- 1
     print "myMap"
     print(myMap f1 [1,2,3])
+
+    -- Algebraic Datatypes
+    -- 1 a)
+    print "evalExpr"
+    print (evalExpr (Add (Value 2) (Value 3)))
+
+    -- 1 b)
+    print "showExpr"
