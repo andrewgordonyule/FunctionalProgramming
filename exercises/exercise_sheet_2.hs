@@ -74,6 +74,33 @@ echoFile path = do
     let strLines = lines str
     forM_ strLines (putStrLn)
 
+-- 3. Write a function calculator :: IO () which:
+-- Gets an operation (one of +, −, ∗) from the command line; if the input does not match one of these then default to (+)
+-- Gets two numbers using two calls to getLin
+-- Outputs the operation applied to the two integers
+
+getOperator :: String -> (Int -> Int -> Int)
+getOperator "+" = (+)
+getOperator "-" = (-)
+getOperator "*" = (*)
+getOperator _ = (+)
+
+
+
+calculator :: IO ()
+calculator = do
+    putStrLn "Enter an operator: + , - or *"
+    myOperator <- getLine
+    let myOperatorFunc = getOperator myOperator
+    putStrLn "Enter first number: "
+    num1 <- getLine
+    putStrLn "Enter second number: "
+    num2 <- getLine
+    let result = myOperatorFunc (read num1 :: Int) (read num2 :: Int) 
+    putStrLn (num1 ++ " " ++ myOperator ++ " " ++ num2 ++ " = ")
+    putStrLn $ show result
+
+
 main = do
 
     -- Booleans, Comparisons, Tuples and More Lists
