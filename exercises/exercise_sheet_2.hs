@@ -2,6 +2,7 @@
 
 import Data.Char
 import Data.Foldable
+import Control.Monad
 
 -- Booleans, Comparisons, Tuples and More Lists
 
@@ -86,7 +87,6 @@ getOperator "*" = (*)
 getOperator _ = (+)
 
 
-
 calculator :: IO ()
 calculator = do
     putStrLn "Enter an operator: + , - or *"
@@ -99,6 +99,21 @@ calculator = do
     let result = myOperatorFunc (read num1 :: Int) (read num2 :: Int) 
     putStrLn (num1 ++ " " ++ myOperator ++ " " ++ num2 ++ " = ")
     putStrLn $ show result
+
+
+-- 4. Write a function infiniteAppend :: IO () which
+-- a) Gets a file path from the console
+-- b) Gets a line from the console and appends it to the file
+-- c) Repeats step (b)
+
+infiniteAppend :: IO ()
+infiniteAppend = do
+    putStrLn "Enter file path to append to: "
+    myFilePath <- getLine
+    putStrLn "Enter text to append to file: "
+    myText <- getLine
+    let appendText = appendFile myFilePath myText
+    forever appendText
 
 
 main = do
