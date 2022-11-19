@@ -116,6 +116,20 @@ infiniteAppend = do
     forever appendText
 
 
+-- Further Exercises
+
+-- Write a function which takes the first 9 digits of an ISBN and calculates the check digit
+isbnCheck :: String -> String
+isbnCheck isbn = if digit == 10 then "X" else (show digit)
+    where
+        isbnDigits = map (read . (:"")) isbn :: [Int]
+        numbers = reverse [2..10]
+        combineList = zipWith (*) numbers isbnDigits
+        sumList = sum combineList
+        remainder = sumList `mod` 11
+        digit = 11 - remainder
+
+
 main = do
 
     -- Booleans, Comparisons, Tuples and More Lists
