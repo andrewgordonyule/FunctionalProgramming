@@ -41,8 +41,7 @@ myReverseRec (x:xs) = myReverseRec xs ++ [x]
 
 -- 6. Write a function which reverses the given list using fold
 myReverseFold :: [a] -> [a]
-myReverseFold [] = []
--- 
+myReverseFold x = foldl (\acc x -> x:acc) [] x
 
 
 -- Higher Order Functions
@@ -54,6 +53,18 @@ myMap f1 (x:xs) = f1 x : myMap f1 xs
 
 f1 x = x*2
 
+-- 2. Write a function myFoldr which is a right-associative fold over input list
+myFoldr :: (a -> b -> b) -> b -> [a] -> b
+myFoldr _ acc [] = acc
+myFoldr f acc (x:xs) = f x (myFoldr f acc xs)
+
+
+-- 3. Write a function myFoldl which is a left-associative fold over input list
+myFoldl :: (b -> a -> b) -> b -> [a] -> b
+myFoldl _ _ _ = undefined
+
+myFilter :: (a -> Bool) -> [a] -> [a]
+myFilter _ _ = undefined
 
 -- Algebraic Datatypes
 
@@ -89,10 +100,82 @@ evalExpr (Value val1) = val1
 -- b) Write a function showExpr :: ArithExpr -> String which prints an expression as a string 
 -- e.g. showExpr Add (Mul (Value 2) (Value 4)) (Value 5) = "(2 * 4) + 5"
 -- showExpr :: ArithExpr -> String
- 
+showExpr :: ArithExpr -> String
+showExpr _ = undefined
+
+safeHead :: [a] -> Maybe a
+safeHead _ = undefined
+
+safeDiv :: Int -> Int -> Maybe Int
+safeDiv _ _ = undefined
+
+addSafeDiv :: (Int, Int) -> (Int, Int) -> Maybe Int
+addSafeDiv _ _ = undefined
+
+data Tree a = Leaf | Node a [Tree a]
+
+sumTree :: Tree Int -> Int
+sumTree _ = undefined
+
+reverseTree :: Tree a -> Tree a
+reverseTree _ = undefined
+
+data BinaryTree a = BLeaf | BNode a (BinaryTree a) (BinaryTree a)
+
+toTree :: BinaryTree a -> Tree a
+toTree _ = undefined
+
+fromTree :: Tree a -> Maybe (BinaryTree a)
+fromTree _ = undefined
 
 
 -- Further Exercises
+
+-- 1. Write a function mergeSort :: (Ord a) => [a] -> [a] which implements the merge sort algorithm
+mergeSort :: (Ord a) => [a] -> [a]
+mergeSort _ = undefined
+
+-- 2.
+printStats :: IO ()
+printStats = undefined
+
+connectedWords :: IO [String]
+connectedWords = undefined
+
+connectionMap :: [(Char, [Char])]
+connectionMap =
+    [
+        ('a', "aqzsw"),
+        ('b', "bvghn"),
+        ('c', "cxdfv"),
+        ('d', "dxserfc"),
+        ('e', "ewsdr"),
+        ('f', "fdrtgvc"),
+        ('g', "gftyhbv"),
+        ('h', "hgyujnb"),
+        ('i', "iujklo"),
+        ('j', "jhuikmn"),
+        ('k', "kjiolm"),
+        ('l', "lkop"),
+        ('m', "mnjk"),
+        ('n', "nbhjm"),
+        ('o', "oiklp"),
+        ('p', "pol"),
+        ('q', "qwa"),
+        ('r', "redft"),
+        ('s', "sawedxz"),
+        ('t', "trfgy"),
+        ('u', "uyhji"),
+        ('v', "vcfgb"),
+        ('w', "wqase"),
+        ('x', "xzsdc"),
+        ('y', "ytghu"),
+        ('z', "zasx")
+    ]
+
+isConnected :: String -> Bool
+isConnected _ = undefined
+
 
 main = do
     -- Recursion
@@ -116,6 +199,10 @@ main = do
     -- 5
     print "myReverseRec"
     print (myReverseRec[1,2,3,4])
+
+    -- 6
+    print "myReverseFold"
+    print (myReverseFold[1,2,3,4,5])
 
     -- Higher Order Functions
     -- 1
