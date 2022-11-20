@@ -61,7 +61,8 @@ myFoldr f acc (x:xs) = f x (myFoldr f acc xs)
 
 -- 3. Write a function myFoldl which is a left-associative fold over input list
 myFoldl :: (b -> a -> b) -> b -> [a] -> b
-myFoldl _ _ _ = undefined
+myFoldl _ acc [] = acc
+myFoldl f acc (x:xs) = myFoldl f (f acc x) xs
 
 myFilter :: (a -> Bool) -> [a] -> [a]
 myFilter _ _ = undefined
