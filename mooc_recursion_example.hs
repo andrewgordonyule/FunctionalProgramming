@@ -3,8 +3,8 @@
 -- Recursion
 
 myLength :: [a] -> Int
-mylength [] = 0
-myLength (x:xs) = 1 + length (xs)
+myLength [] = 0
+myLength (x:xs) = 1 + myLength (xs)
 
 myFilter :: (a -> Bool) -> [a] -> [a]
 myFilter pred [] = []
@@ -18,8 +18,8 @@ myFilter pred (x:xs) =
 
 main = do
     -- Recursion
-    print("List recursion example")
-    print(myLength ['a','c' .. 'w'])
+    print("List recursion example: myLength")
+    print(myLength [1,2,3,4,5])
 
     print("Filter example")
     print(filter (<5) [2,4,7,9])
@@ -31,5 +31,5 @@ main = do
     print("Function composition using map")
     print(map ((+5) . (*3)) [1 .. 10])
     
-    print("Reverse examplewith foldl")
+    print("Reverse example with foldl")
     print(foldl (\acc x -> x:acc) "" "Reverse")
