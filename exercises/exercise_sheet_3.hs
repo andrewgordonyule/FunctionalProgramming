@@ -120,11 +120,17 @@ showExpr (Sub val1 val2) = v1 ++ " - " ++ v2
 showExpr (Div val1 val2) = v1 ++ " div " ++ v2
     where (v1, v2) = (displayParenthesis val1, displayParenthesis val2)
 
--- showExpr Add (Mul (Value 2) (Value 4)) (Value 5) = "(2 * 4) + 5"
+-- showExpr (Add (Mul (Value 2) (Value 4)) (Value 5)) = "(2 * 4) + 5"
 
+-- 2
+-- a) Write a function which returns the head of a list if the list is non-empty,
+-- and Nothing otherwise
 safeHead :: [a] -> Maybe a
-safeHead _ = undefined
+safeHead [] = Nothing
+safeHead (x:_) = Just x
 
+-- b) Write a function which returns the first argument divided by the second argument
+-- if the second argument is not 0, and Nothing otherwise
 safeDiv :: Int -> Int -> Maybe Int
 safeDiv _ _ = undefined
 
