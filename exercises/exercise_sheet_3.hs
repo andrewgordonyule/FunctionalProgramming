@@ -1,4 +1,4 @@
-import GHC.CmmToAsm.AArch64.Instr (x0)
+--import GHC.CmmToAsm.AArch64.Instr (x0)
 -- Exercise Sheet 3
 
 -- Recursion
@@ -65,7 +65,10 @@ myFoldl _ acc [] = acc
 myFoldl f acc (x:xs) = myFoldl f (f acc x) xs
 
 myFilter :: (a -> Bool) -> [a] -> [a]
-myFilter _ _ = undefined
+myFilter _ [] = []
+myFilter fp (x:xs)
+    | fp x = x : myFilter fp xs
+    | otherwise = myFilter fp xs
 
 -- Algebraic Datatypes
 
