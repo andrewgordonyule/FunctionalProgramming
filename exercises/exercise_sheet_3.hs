@@ -83,6 +83,7 @@ data ArithExpr =
 
 -- a) Write the function evalExpr :: ArithExpr -> Int which evaluates an expression
 evalExpr :: ArithExpr -> Int
+evalExpr (Value x) = x
 evalExpr (Add val1 val2) = v1 + v2
     where
         v1 = evalExpr val1
@@ -99,13 +100,27 @@ evalExpr (Div val1 val2) = div v1 v2
     where
         v1 = evalExpr val1
         v2 = evalExpr val2
-evalExpr (Value val1) = val1
 
 -- b) Write a function showExpr :: ArithExpr -> String which prints an expression as a string 
 -- e.g. showExpr Add (Mul (Value 2) (Value 4)) (Value 5) = "(2 * 4) + 5"
 -- showExpr :: ArithExpr -> String
+
+displayParenthesis :: ArithExpr -> String
+displayParenthesis (Value v1) = showExpr (Value v1)
+displayParenthesis v2 = "( " ++ showExpr v2 ++ " )"
+
 showExpr :: ArithExpr -> String
-showExpr _ = undefined
+showExpr (Value x) = show x
+showExpr (Add val1 val2) = v1 ++ " + " ++ v2
+    where (v1, v2) = (displayParenthesis val1, displayParenthesis val2)
+showExpr (Mul val1 val2) = v1 ++ " * " ++ v2
+    where (v1, v2) = (displayParenthesis val1, displayParenthesis val2)
+showExpr (Sub val1 val2) = v1 ++ " - " ++ v2
+    where (v1, v2) = (displayParenthesis val1, displayParenthesis val2)
+showExpr (Div val1 val2) = v1 ++ " div " ++ v2
+    where (v1, v2) = (displayParenthesis val1, displayParenthesis val2)
+
+-- showExpr Add (Mul (Value 2) (Value 4)) (Value 5) = "(2 * 4) + 5"
 
 safeHead :: [a] -> Maybe a
 safeHead _ = undefined
