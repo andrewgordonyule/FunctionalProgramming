@@ -132,10 +132,19 @@ safeHead (x:_) = Just x
 -- b) Write a function which returns the first argument divided by the second argument
 -- if the second argument is not 0, and Nothing otherwise
 safeDiv :: Int -> Int -> Maybe Int
-safeDiv _ _ = undefined
+safeDiv _ 0 = Nothing
+safeDiv a b = Just (a `div` b)
 
+-- c) Write a function which applies safeDiv to each pair of input numbers,
+-- and returns the results added together
 addSafeDiv :: (Int, Int) -> (Int, Int) -> Maybe Int
-addSafeDiv _ _ = undefined
+addSafeDiv (x1,x2) (y1,y2) = 
+    case safeDiv x1 x2 of
+        Just result1 -> 
+            case safeDiv y1 y2 of
+                Just result2 -> Just (result1 + result2)
+                Nothing -> Nothing
+        Nothing -> Nothing
 
 data Tree a = Leaf | Node a [Tree a]
 
