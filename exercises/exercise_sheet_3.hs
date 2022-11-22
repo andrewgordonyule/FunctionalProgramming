@@ -146,10 +146,17 @@ addSafeDiv (x1,x2) (y1,y2) =
                 Nothing -> Nothing
         Nothing -> Nothing
 
+
+-- 3. Suppose we have the following data type, defining n-ary trees:
 data Tree a = Leaf | Node a [Tree a]
 
+-- a) Write a function which returns the sum of all integers in the tree
 sumTree :: Tree Int -> Int
-sumTree _ = undefined
+sumTree Leaf = 0
+sumTree (Node x childTree) = x + sumChildTree
+    where 
+        sumChildTree = foldr (\childTree acc -> acc + (sumTree childTree)) 0 childTree
+
 
 reverseTree :: Tree a -> Tree a
 reverseTree _ = undefined
